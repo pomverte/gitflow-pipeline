@@ -1,0 +1,4 @@
+#!groovy
+gitflowPipeline {
+  jgitflowGoal = 'release-finish'
+}
