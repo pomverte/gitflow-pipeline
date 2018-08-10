@@ -18,6 +18,7 @@ pipeline {
         docker {
           image "${mavenDockerImage}"
           args '-v $HOME/.m2:/root/.m2 -v $PWD/tailon-docker:/work -w /work'
+          reuseNode true
         }
       }
       steps {
