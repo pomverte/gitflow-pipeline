@@ -22,7 +22,8 @@ pipeline {
         }
       }
       steps {
-        runMavenGoal "jgitflow:release-start -B -DallowUntracked=true -DautoVersionSubmodules=true -DpushReleases=true -DreleaseBranchVersionSuffix=RC -DnoDeploy=true -DscmCommentPrefix=[jgitflow] -Dusername=\'${GIT_USERNAME}\' -Dpassword=\'${GIT_PASSWORD}\'"
+        runMavenGoal "jgitflow:release-start -B -DallowUntracked=true -DautoVersionSubmodules=true -DpushReleases=true -DreleaseBranchVersionSuffix=RC -DnoDeploy=true -DscmCommentPrefix=[jgitflow]"
+        //  -Dusername=\'${GIT_USERNAME}\' -Dpassword=\'${GIT_PASSWORD}\'
       }
     }
   }
