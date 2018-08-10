@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout SCM') {
       steps {
-        git url: 'http://10.243.24.202:3000/hvle/tailon-docker.git'
+        git url: 'http://gitea:3000/hvle/tailon-docker.git'
       }
     }
     stage('Release') {
@@ -22,7 +22,6 @@ pipeline {
         }
       }
       steps {
-        sh 'git clone http://10.243.24.202:3000/hvle/tailon-docker.git && cd tailon-docker'
         runMavenGoal "jgitflow:release-start -B -DallowUntracked=true -DautoVersionSubmodules=true -DpushReleases=true -DreleaseBranchVersionSuffix=RC -DnoDeploy=true -DscmCommentPrefix=[jgitflow] -Dusername=\'${GIT_USERNAME}\' -Dpassword=\'${GIT_PASSWORD}\'"
       }
     }
