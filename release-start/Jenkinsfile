@@ -1,0 +1,29 @@
+#!groovy
+pipeline {
+
+  agent {
+    docker {
+      image 'vietnem/maven-git:3.5.4-jdk-8-alpine'
+    }
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
+
+  stages {
+    stage('Release') {
+      steps {
+        sh 'git clone http://10.243.24.202:3000/hvle/tailon-docker.git && cd tailon-docker'
+        runMavenGoal "jgitflow:release-start -B -DallowUntracked=true -DautoVersionSubmodules=true -DpushReleases=true -DreleaseBranchVersionSuffix=RC -DnoDeploy=true -DscmCommentPrefix=[jgitflow] -Dusername=\'${GIT_USERNAME}\' -Dpassword=\'${GIT_PASSWORD}\'"
+      }
+    }
+  }
+
+  post {
+    always {
+      notifySlack "${currentBuild.currentResult}", "#graylog-notifications"
+    }
+  }
+
+}
