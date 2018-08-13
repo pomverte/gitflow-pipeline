@@ -1,0 +1,3 @@
+= Gitflow Pipeline
+
+Jenkins files use to call this https://github.com/pomverte/jenkins-shared-pipeline[shared-pipeline]
